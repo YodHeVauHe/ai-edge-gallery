@@ -46,6 +46,9 @@ message ImportedModel {
   oneof config {
     LlmConfig llm_config = 3;
   }
+
+  // Set for Hugging Face and other remote imports. Empty for a local file copy.
+  string download_url = 4;
 }
 
 message LlmConfig {

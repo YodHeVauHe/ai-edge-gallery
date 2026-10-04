@@ -54,6 +54,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.Link
+import androidx.compose.material.icons.outlined.TravelExplore
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Error
 import androidx.compose.material3.AlertDialog
@@ -299,6 +300,11 @@ fun GlobalModelManager(
         ) {
           Column {
             Text(
+              text = "LIBRARY",
+              style = MaterialTheme.typography.labelMedium,
+              color = MaterialTheme.colorScheme.primary,
+            )
+            Text(
               text = "Models",
               style = MaterialTheme.typography.headlineLarge,
               color = MaterialTheme.colorScheme.onSurface,
@@ -484,6 +490,7 @@ fun GlobalModelManager(
 
   // Import model bottom sheet.
   var showRemoteImportDialog by remember { mutableStateOf(false) }
+  var showHfDiscover by remember { mutableStateOf(false) }
   if (showImportModelSheet) {
     ModalBottomSheet(onDismissRequest = { showImportModelSheet = false }, sheetState = sheetState) {
       Text(
@@ -523,6 +530,29 @@ fun GlobalModelManager(
         ) {
           Icon(Icons.AutoMirrored.Outlined.NoteAdd, contentDescription = null)
           Text("From local model file", modifier = Modifier.clearAndSetSemantics {})
+        }
+      }
+      Box(
+        modifier =
+          Modifier.clickable {
+              scope.launch {
+                delay(200)
+                showImportModelSheet = false
+                showHfDiscover = true
+              }
+            }
+            .semantics {
+              role = Role.Button
+              contentDescription = "Find Hugging Face models"
+            }
+      ) {
+        Row(
+          verticalAlignment = Alignment.CenterVertically,
+          horizontalArrangement = Arrangement.spacedBy(6.dp),
+          modifier = Modifier.fillMaxWidth().padding(16.dp),
+        ) {
+          Icon(Icons.Outlined.TravelExplore, contentDescription = null)
+          Text("Find on Hugging Face", modifier = Modifier.clearAndSetSemantics {})
         }
       }
       // From remote URL option
@@ -568,6 +598,21 @@ fun GlobalModelManager(
         },
       )
     }
+  }
+
+  if (showHfDiscover) {
+    HfDiscoverScreen(
+      onDismiss = { showHfDiscover = false },
+      onImportFile = { modelId, file, architecture ->
+        viewModel.addImportedLlmModel(
+          info = importedModelFromCatalog(modelId = modelId, file = file, architecture = architecture)
+        )
+        showHfDiscover = false
+        scope.launch {
+          snackbarHostState.showSnackbar("Model added. Download it from the list. Gated models still use your Hugging Face token.")
+        }
+      },
+    )
   }
 
   // Remote URL import dialog

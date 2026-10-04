@@ -660,6 +660,7 @@ fun ModelRemoteImportDialog(
                 ImportedModel.newBuilder()
                   .setFileName(modelName.ifEmpty { "remote_model" })
                   .setFileSize(fileSize)
+                  .setDownloadUrl(modelUrl.trim())
                   .setLlmConfig(
                     LlmConfig.newBuilder()
                       .addAllCompatibleAccelerators(supportedAccelerators)

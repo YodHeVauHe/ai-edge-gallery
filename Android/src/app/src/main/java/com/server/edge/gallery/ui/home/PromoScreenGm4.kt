@@ -107,7 +107,7 @@ fun PromoScreenGm4(onDismiss: () -> Unit) {
 
       // Dismiss button.
       TextButton(onClick = onDismiss, modifier = Modifier.padding(top = 24.dp)) {
-        Text("Dismiss", color = Color(0xFFA8C7FA))
+        Text("Dismiss", color = Color(0xFFF0B08A))
       }
     }
   }

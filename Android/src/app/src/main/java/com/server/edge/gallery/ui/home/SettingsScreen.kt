@@ -137,6 +137,12 @@ fun SettingsScreen(
             modifier = Modifier.padding(horizontal = 20.dp, vertical = 20.dp),
         ) {
             Text(
+                "ON THIS PHONE",
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.primary,
+            )
+            Spacer(Modifier.height(4.dp))
+            Text(
                 "Settings",
                 style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
             )
