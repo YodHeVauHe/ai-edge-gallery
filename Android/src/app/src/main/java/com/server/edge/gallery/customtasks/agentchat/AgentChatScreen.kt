@@ -98,6 +98,7 @@ import com.server.edge.gallery.ui.llmchat.LlmChatScreen
 import com.server.edge.gallery.ui.llmchat.LlmChatViewModel
 import com.server.edge.gallery.ui.modelmanager.ModelInitializationStatusType
 import com.server.edge.gallery.ui.modelmanager.ModelManagerViewModel
+import com.server.edge.gallery.ui.theme.customColors
 import com.google.ai.edge.litertlm.tool
 import java.lang.Exception
 import kotlin.coroutines.resume
@@ -422,7 +423,9 @@ fun AgentChatScreen(
                   MaterialTheme.typography.headlineLarge.copy(
                     fontWeight = FontWeight.Medium,
                     brush =
-                      Brush.linearGradient(colors = listOf(Color(0xFF85B1F8), Color(0xFF3174F1))),
+                      Brush.linearGradient(
+                        colors = MaterialTheme.customColors.appTitleGradientColors
+                      ),
                   ),
                 modifier = Modifier.padding(top = 12.dp, bottom = 16.dp),
               )

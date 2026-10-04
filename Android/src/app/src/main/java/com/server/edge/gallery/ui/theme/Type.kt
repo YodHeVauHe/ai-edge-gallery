@@ -51,9 +51,23 @@ val AppTypography =
     bodyLarge = baseline.bodyLarge.copy(fontFamily = appFontFamily),
     bodyMedium = baseline.bodyMedium.copy(fontFamily = appFontFamily),
     bodySmall = baseline.bodySmall.copy(fontFamily = appFontFamily),
-    labelLarge = baseline.labelLarge.copy(fontFamily = appFontFamily),
-    labelMedium = baseline.labelMedium.copy(fontFamily = appFontFamily),
-    labelSmall = baseline.labelSmall.copy(fontFamily = appFontFamily),
+    labelLarge =
+      baseline.labelLarge.copy(
+        fontFamily = appFontFamily,
+        fontWeight = FontWeight.SemiBold,
+        letterSpacing = 0.4.sp,
+      ),
+    labelMedium =
+      baseline.labelMedium.copy(
+        fontFamily = appFontFamily,
+        fontWeight = FontWeight.Medium,
+        letterSpacing = 0.5.sp,
+      ),
+    labelSmall =
+      baseline.labelSmall.copy(
+        fontFamily = appFontFamily,
+        letterSpacing = 0.6.sp,
+      ),
   )
 
 val titleMediumNarrow =
@@ -91,10 +105,10 @@ val bodySmallMediumNarrowBold =
 val homePageTitleStyle =
   baseline.displayMedium.copy(
     fontFamily = appFontFamily,
-    fontSize = 48.sp,
-    lineHeight = 48.sp,
-    letterSpacing = -1.sp,
-    fontWeight = FontWeight.Medium,
+    fontSize = 44.sp,
+    lineHeight = 46.sp,
+    letterSpacing = (-1.4).sp,
+    fontWeight = FontWeight.ExtraBold,
   )
 
 val bodyLargeNarrow = baseline.bodyLarge.copy(letterSpacing = 0.2.sp)
@@ -102,5 +116,17 @@ val bodyMediumMedium = baseline.bodyMedium.copy(fontWeight = FontWeight.Medium)
 
 val headlineLargeMedium = baseline.headlineLarge.copy(fontWeight = FontWeight.Medium)
 
-val emptyStateTitle = baseline.headlineSmall.copy(fontSize = 37.sp, lineHeight = 50.sp)
-val emptyStateContent = baseline.headlineSmall.copy(fontSize = 16.sp, lineHeight = 22.sp)
+val emptyStateTitle =
+  baseline.headlineSmall.copy(
+    fontFamily = appFontFamily,
+    fontSize = 32.sp,
+    lineHeight = 36.sp,
+    letterSpacing = (-0.6).sp,
+    fontWeight = FontWeight.ExtraBold,
+  )
+val emptyStateContent =
+  baseline.bodyLarge.copy(
+    fontFamily = appFontFamily,
+    fontSize = 16.sp,
+    lineHeight = 24.sp,
+  )

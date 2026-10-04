@@ -82,7 +82,7 @@ data class PromptTemplateConfig(val inputEditors: List<PromptTemplateInputEditor
 
 private val GEMINI_GRADIENT_STYLE =
   SpanStyle(
-    brush = linearGradient(colors = listOf(Color(0xFF4285f4), Color(0xFF9b72cb), Color(0xFFd96570)))
+    brush = linearGradient(colors = listOf(Color(0xFF8C3E22), Color(0xFF1A5C56), Color(0xFF6B5424)))
   )
 
 @Suppress("ImmutableEnum")

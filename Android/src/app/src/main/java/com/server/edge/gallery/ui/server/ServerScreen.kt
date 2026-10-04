@@ -144,6 +144,11 @@ fun ServerScreen(modifier: Modifier = Modifier) {
     ) {
         // Header
         Text(
+            text = "ON THIS PHONE",
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.primary,
+        )
+        Text(
             text = "API Server",
             style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold),
             color = MaterialTheme.colorScheme.onSurface,

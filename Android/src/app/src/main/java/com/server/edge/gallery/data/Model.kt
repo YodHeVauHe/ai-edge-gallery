@@ -346,7 +346,9 @@ data class Model(
   }
 
   fun getPath(context: Context, fileName: String = downloadFileName): String {
-    if (imported) {
+    // Local copies live under the imports directory. Remote imports use the same
+    // normalizedName/version layout as the download worker.
+    if (imported && url.isEmpty()) {
       return listOf(context.getExternalFilesDir(null)?.absolutePath ?: "", fileName)
         .joinToString(File.separator)
     }

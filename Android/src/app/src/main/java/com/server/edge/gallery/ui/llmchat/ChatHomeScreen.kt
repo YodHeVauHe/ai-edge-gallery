@@ -260,6 +260,11 @@ private fun NoModelEmptyState() {
       horizontalAlignment = Alignment.Start,
       verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
+      Text(
+        "HARBOR",
+        style = MaterialTheme.typography.labelMedium,
+        color = MaterialTheme.colorScheme.primary,
+      )
       Text(stringResource(R.string.aichat_no_model_title), style = emptyStateTitle)
       Text(
         stringResource(R.string.aichat_no_model_content),
@@ -282,6 +287,11 @@ private fun DefaultChatEmptyState() {
       horizontalAlignment = Alignment.Start,
       verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
+      Text(
+        "HARBOR",
+        style = MaterialTheme.typography.labelMedium,
+        color = MaterialTheme.colorScheme.primary,
+      )
       Text(stringResource(R.string.aichat_emptystate_title), style = emptyStateTitle)
       Text(
         stringResource(R.string.aichat_emptystate_content),

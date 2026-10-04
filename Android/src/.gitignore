@@ -24,6 +24,9 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
+keystore.properties
+*.jks
+*.keystore
 /build
 /captures
 .externalNativeBuild

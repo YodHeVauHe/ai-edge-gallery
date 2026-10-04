@@ -230,10 +230,10 @@
   <string name="mobile_actions_challenge_load_model" translatable="false">Load Model</string>
 
   <!-- Strings for skills -->
-  <string name="aichat_emptystate_title" translatable="false">AI Chat</string>
-  <string name="aichat_emptystate_content" translatable="false">Chat with on-device large language models.</string>
-  <string name="aichat_no_model_title" translatable="false">How can I help you?</string>
-  <string name="aichat_no_model_content" translatable="false">Select and load a native model first, then chat with text, images, documents, or voice.</string>
+  <string name="aichat_emptystate_title" translatable="false">On this phone</string>
+  <string name="aichat_emptystate_content" translatable="false">Chat with a model that stays on the device. The Server tab can expose the same model as an OpenAI-compatible API.</string>
+  <string name="aichat_no_model_title" translatable="false">No model loaded</string>
+  <string name="aichat_no_model_content" translatable="false">Open Models and load one. Hugging Face search, a URL, a gated access token, and a local file all stay available.</string>
   <string name="load_model_first_dialog_title" translatable="false">Load model first</string>
   <string name="load_model_first_dialog_content" translatable="false">Please load a model first to start chatting.</string>
   <string name="add_script" translatable="false">Add script</string>

@@ -369,7 +369,7 @@ constructor(
       }
     }
 
-    if (model.imported) {
+    if (model.imported && model.url.isEmpty()) {
       deleteFilesFromImportDir(model.downloadFileName)
     } else {
       deleteDirFromExternalFilesDir(model.normalizedName)
@@ -806,12 +806,7 @@ constructor(
     // Add initial status and states.
     val modelDownloadStatus = uiState.value.modelDownloadStatus.toMutableMap()
     val modelInstances = uiState.value.modelInitializationStatus.toMutableMap()
-    modelDownloadStatus[model.name] =
-      ModelDownloadStatus(
-        status = ModelDownloadStatusType.SUCCEEDED,
-        receivedBytes = info.fileSize,
-        totalBytes = info.fileSize,
-      )
+    modelDownloadStatus[model.name] = statusForImported(info, model)
     modelInstances[model.name] =
       ModelInitializationStatus(status = ModelInitializationStatusType.NOT_INITIALIZED)
 
@@ -1353,12 +1348,7 @@ constructor(
       }
 
       // Update status.
-      modelDownloadStatus[model.name] =
-        ModelDownloadStatus(
-          status = ModelDownloadStatusType.SUCCEEDED,
-          receivedBytes = importedModel.fileSize,
-          totalBytes = importedModel.fileSize,
-        )
+      modelDownloadStatus[model.name] = statusForImported(importedModel, model)
     }
 
     val textInputHistory = dataStoreRepository.readTextInputHistory()
@@ -1371,6 +1361,17 @@ constructor(
       modelDownloadStatus = modelDownloadStatus,
       modelInitializationStatus = modelInstances,
       textInputHistory = textInputHistory,
+    )
+  }
+
+  private fun statusForImported(info: ImportedModel, model: Model): ModelDownloadStatus {
+    if (info.downloadUrl.isNotEmpty()) {
+      return getModelDownloadStatus(model)
+    }
+    return ModelDownloadStatus(
+      status = ModelDownloadStatusType.SUCCEEDED,
+      receivedBytes = info.fileSize,
+      totalBytes = info.fileSize,
     )
   }
 
@@ -1402,13 +1403,15 @@ constructor(
           supportThinking = llmSupportThinking,
         )
         .toMutableList()
+    val remote = info.downloadUrl.isNotEmpty()
     val model =
       Model(
         name = info.fileName,
-        url = "",
+        url = info.downloadUrl,
         configs = configs,
         sizeInBytes = info.fileSize,
-        downloadFileName = "$IMPORTS_DIR/${info.fileName}",
+        downloadFileName =
+          if (remote) fileNameFromDownloadUrl(info.downloadUrl) else "$IMPORTS_DIR/${info.fileName}",
         showBenchmarkButton = false,
         showRunAgainButton = false,
         imported = true,
@@ -1669,4 +1672,14 @@ constructor(
 
 private fun getAllowlistUrl(version: String): String {
   return "$ALLOWLIST_BASE_URL/${version}.json"
+}
+
+private fun fileNameFromDownloadUrl(url: String): String {
+  val name = url.substringBefore('?').trimEnd('/').substringAfterLast('/')
+  if (name.isBlank()) return "model.litertlm"
+  return try {
+    java.net.URLDecoder.decode(name, "UTF-8")
+  } catch (_: Exception) {
+    name
+  }
 }
